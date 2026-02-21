@@ -264,6 +264,10 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
                 title: const Text('Checkbox'),
                 body: inputs.CheckBoxPage(),
               ),
+              PaneItem(
+                title: const Text('Radio'),
+                body: inputs.RadioButtonPage(),
+              ),
               PaneItem(title: const Text('Slider'), body: inputs.SliderPage()),
               PaneItem(
                 title: const Text('ToggleSwitch'),

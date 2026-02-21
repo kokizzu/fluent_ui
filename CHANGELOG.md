@@ -42,7 +42,35 @@
   - `InfoBadge` style variants (success, attention, critical), dot badges and adaptive sizing ([#1277](https://github.com/bdlukaa/fluent_ui/pull/1277))
   - `NavigationView` holds a local history. Use `NavigationView.of(context).pop()` or `PaneBackButton` to navigate to the previous index ([#1266](https://github.com/bdlukaa/fluent_ui/issues/1266))
 - chore: Updated Russian translations ([#1253](https://github.com/bdlukaa/fluent_ui/pull/1253/))
-- Update Chinese translations
+- Update Chinese translations ([#1283](https://github.com/bdlukaa/fluent_ui/pull/1283))
+- **BREAKING CHANGE** `RadioButton` API reworked to use `RadioGroup` for state management.
+  - Removed `checked` and `onChanged` parameters from **`RadioButton`**.
+  - Added required `value` parameter to `RadioButton<T>`.
+  - Radio buttons must now be wrapped in a `RadioGroup<T>`, which holds `groupValue` and `onChanged`.
+  - Radio buttons are no longer toggleable (selecting an already-selected button has no effect).
+
+  Before:
+  ```dart
+  RadioButton(
+    checked: selectedIndex == 0,
+    onChanged: (value) { if (value) setState(() => selectedIndex = 0); },
+    content: Text('Option 1'),
+  )
+  ```
+
+  After:
+  ```dart
+  RadioGroup<int>(
+    groupValue: selectedIndex,
+    onChanged: (value) { if (value != null) setState(() => selectedIndex = value); },
+    child: Column(
+      children: [
+        RadioButton<int>(value: 0, content: Text('Option 1')),
+        RadioButton<int>(value: 1, content: Text('Option 2')),
+      ],
+    ),
+  )
+  ```
 
 ## 4.13.0
 
