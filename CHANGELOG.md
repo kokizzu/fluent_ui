@@ -71,6 +71,7 @@
     ),
   )
   ```
+- fix: Flyout barrier color ([#1276](https://github.com/bdlukaa/fluent_ui/issues/1276))
 
 ## 4.13.0
 
