@@ -1,6 +1,6 @@
 ## [next]
 
-- fix: Correctly handle system text scaling on `DatePicker`, `TimePicker`, `AutoSuggestBox` popups ([#1321](https://github.com/bdlukaa/fluent_ui/issues/1321), [#1286](https://github.com/bdlukaa/fluent_ui/pull/1286))
+- fix: Correctly handle system text scaling on `DatePicker`, `TimePicker`, `AutoSuggestBox`, `CalendarDatePicker` popups ([#1321](https://github.com/bdlukaa/fluent_ui/issues/1321), [#1286](https://github.com/bdlukaa/fluent_ui/pull/1286))
 
 ## 4.14.0
 
