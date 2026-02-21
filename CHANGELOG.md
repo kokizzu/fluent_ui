@@ -17,7 +17,7 @@
 - fix: Correctly apply theme durations to animations ([#1231](https://github.com/bdlukaa/fluent_ui/issues/1231))
 - feat: Apply text height on `Typography`
 - refactor: Encourage usage of `EdgeInsetsDirectional` instead of `EdgeInsets`
-- refactor: Remove `BottomNavigationBar` and all its related widgets
+- **BREAKING CHANGE** refactor: Remove `BottomNavigationBar` and all its related widgets
 - **MINOR BREAKING** refactor: Remove `Brightness.isLight`, `Brightness.isDark` and `Brightness.opposite` extension methods. Use `switch` statements instead.
 - feat: Add latest color resources from Microsoft UI XAML.
 - refactor(perf): Optimize animation handling in Scrollbar, NavigationView, Acrylic and buttons.

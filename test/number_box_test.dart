@@ -639,45 +639,43 @@ void main() {
   });
 
   group('NumberBox interval (hold-to-repeat) tests', () {
-    testWidgets(
-      'NumberBox auto-increments when spin button is held',
-      (tester) async {
-        int? newValue;
-        await tester.pumpWidget(
-          wrapApp(
-            child: NumberBox<int>(
-              value: 0,
-              onChanged: (value) {
-                newValue = value;
-              },
-              mode: SpinButtonPlacementMode.inline,
-              interval: const Duration(milliseconds: 100),
-            ),
+    testWidgets('NumberBox auto-increments when spin button is held', (
+      tester,
+    ) async {
+      int? newValue;
+      await tester.pumpWidget(
+        wrapApp(
+          child: NumberBox<int>(
+            value: 0,
+            onChanged: (value) {
+              newValue = value;
+            },
+            mode: SpinButtonPlacementMode.inline,
           ),
-        );
+        ),
+      );
 
-        // Press and hold the increment button
-        final gesture = await tester.startGesture(
-          tester.getCenter(find.byIcon(FluentIcons.chevron_up)),
-        );
+      // Press and hold the increment button
+      final gesture = await tester.startGesture(
+        tester.getCenter(find.byIcon(FluentIcons.chevron_up)),
+      );
 
-        // First increment fires immediately on pointer down
-        await tester.pump();
-        expect(newValue, equals(1));
+      // First increment fires immediately on pointer down
+      await tester.pump();
+      expect(newValue, equals(1));
 
-        // After one interval, should auto-increment again
-        await tester.pump(const Duration(milliseconds: 100));
-        expect(newValue, equals(2));
+      // After one interval, should auto-increment again
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(newValue, equals(2));
 
-        // After another interval
-        await tester.pump(const Duration(milliseconds: 100));
-        expect(newValue, equals(3));
+      // After another interval
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(newValue, equals(3));
 
-        // Release the button
-        await gesture.up();
-        await tester.pumpAndSettle();
-      },
-    );
+      // Release the button
+      await gesture.up();
+      await tester.pumpAndSettle();
+    });
 
     testWidgets(
       'NumberBox auto-decrements when decrement spin button is held',
@@ -691,7 +689,6 @@ void main() {
                 newValue = value;
               },
               mode: SpinButtonPlacementMode.inline,
-              interval: const Duration(milliseconds: 100),
             ),
           ),
         );
@@ -727,7 +724,6 @@ void main() {
                 newValue = value;
               },
               mode: SpinButtonPlacementMode.inline,
-              interval: const Duration(milliseconds: 100),
             ),
           ),
         );
@@ -753,73 +749,70 @@ void main() {
       },
     );
 
-    testWidgets(
-      'NumberBox uses smallChange step during auto-repeat',
-      (tester) async {
-        int? newValue;
-        await tester.pumpWidget(
-          wrapApp(
-            child: NumberBox<int>(
-              value: 0,
-              smallChange: 5,
-              onChanged: (value) {
-                newValue = value;
-              },
-              mode: SpinButtonPlacementMode.inline,
-              interval: const Duration(milliseconds: 100),
-            ),
+    testWidgets('NumberBox uses smallChange step during auto-repeat', (
+      tester,
+    ) async {
+      int? newValue;
+      await tester.pumpWidget(
+        wrapApp(
+          child: NumberBox<int>(
+            value: 0,
+            smallChange: 5,
+            onChanged: (value) {
+              newValue = value;
+            },
+            mode: SpinButtonPlacementMode.inline,
           ),
-        );
+        ),
+      );
 
-        final gesture = await tester.startGesture(
-          tester.getCenter(find.byIcon(FluentIcons.chevron_up)),
-        );
+      final gesture = await tester.startGesture(
+        tester.getCenter(find.byIcon(FluentIcons.chevron_up)),
+      );
 
-        // Each step should be 5 (smallChange)
-        await tester.pump();
-        expect(newValue, equals(5));
+      // Each step should be 5 (smallChange)
+      await tester.pump();
+      expect(newValue, equals(5));
 
-        await tester.pump(const Duration(milliseconds: 100));
-        expect(newValue, equals(10));
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(newValue, equals(10));
 
-        await gesture.up();
-        await tester.pumpAndSettle();
-      },
-    );
+      await gesture.up();
+      await tester.pumpAndSettle();
+    });
 
-    testWidgets(
-      'NumberBox does not auto-repeat when interval is null',
-      (tester) async {
-        int callCount = 0;
-        await tester.pumpWidget(
-          wrapApp(
-            child: NumberBox<int>(
-              value: 0,
-              onChanged: (value) {
-                callCount++;
-              },
-              mode: SpinButtonPlacementMode.inline,
-              interval: null,
-            ),
+    testWidgets('NumberBox does not auto-repeat when interval is null', (
+      tester,
+    ) async {
+      var callCount = 0;
+      await tester.pumpWidget(
+        wrapApp(
+          child: NumberBox<int>(
+            value: 0,
+            onChanged: (value) {
+              callCount++;
+            },
+            mode: SpinButtonPlacementMode.inline,
+            interval: null,
           ),
-        );
+        ),
+      );
 
-        // Press and hold the increment button
-        final gesture = await tester.startGesture(
-          tester.getCenter(find.byIcon(FluentIcons.chevron_up)),
-        );
+      // Press and hold the increment button
+      final gesture = await tester.startGesture(
+        tester.getCenter(find.byIcon(FluentIcons.chevron_up)),
+      );
 
-        // First press fires immediately
-        await tester.pump();
-        expect(callCount, equals(1));
+      // First press fires immediately
+      await tester.pump();
+      expect(callCount, equals(1));
 
-        // Waiting well past a typical interval should not trigger more calls
-        await tester.pump(const Duration(milliseconds: 300));
-        expect(callCount, equals(1));
+      // Waiting well past a typical interval should not trigger more calls
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(callCount, equals(1));
 
-        await gesture.up();
-        await tester.pumpAndSettle();
-      },
-    );
+      await gesture.up();
+      await tester.pumpAndSettle();
+    });
   });
 }
