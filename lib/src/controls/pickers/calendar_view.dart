@@ -475,10 +475,7 @@ class CalendarViewState extends State<CalendarView> {
         startDate: _selectedStart,
       ),
       CalendarViewSelectionMode.range => CalendarSelectionData(
-        selectedDates: [
-          if (_selectedStart != null) _selectedStart!,
-          if (_selectedEnd != null) _selectedEnd!,
-        ],
+        selectedDates: [?_selectedStart, ?_selectedEnd],
         startDate: _selectedStart,
         endDate: _selectedEnd,
       ),
@@ -1157,10 +1154,7 @@ class CalendarViewState extends State<CalendarView> {
         layoutBuilder: (currentChild, previousChildren) {
           return Stack(
             alignment: AlignmentDirectional.topCenter,
-            children: [
-              ...previousChildren,
-              if (currentChild != null) currentChild,
-            ],
+            children: [...previousChildren, ?currentChild],
           );
         },
       ),

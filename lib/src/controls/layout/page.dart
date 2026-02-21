@@ -273,7 +273,7 @@ class PageHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          if (leading != null) leading!,
+          ?leading,
           Expanded(
             child: DefaultTextStyle.merge(
               style: theme.typography.title,
