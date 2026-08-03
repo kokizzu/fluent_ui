@@ -1,4 +1,4 @@
-## [next]
+## 4.16.1
 
 - fix: `ComboBox` no longer throws when opening a dropdown with a single item ([#1347](https://github.com/bdlukaa/fluent_ui/pull/1347))
 - fix: `TabView` now keeps each tab's body (and its state) attached to its tab when tabs are reordered, instead of leaving a stateful body parked at its old slot while the header moves
